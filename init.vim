@@ -110,11 +110,12 @@ endif
 inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_end_enclosure() ? "<right>" :
-			\ "\<TAB>"
+			\ "<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_end_enclosure()
-	return !empty(match(getline('.')[col('.') - 1], "[>)}\]\'\"]"))
+	let aux = getline('.')[col('.') - 1]
+	return aux =~# '[>)}\]\"]' || aux == "'"
 endfunction
 
 if has('nvim')
@@ -133,6 +134,8 @@ nmap <silent> <leader>gd <Plug>(coc-definition)
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
+
+nmap <silent> <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <leader>K :call <SID>show_documentation()<CR>
 
