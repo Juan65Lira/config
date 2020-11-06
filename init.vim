@@ -1,18 +1,20 @@
 call plug#begin()
-	Plug 'morhetz/gruvbox'
+	Plug 'joshdick/onedark.vim'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
 	Plug 'bfrg/vim-cpp-modern'
 	Plug 'leafgarland/typescript-vim'
 	Plug 'pangloss/vim-javascript'
+	Plug 'lervag/vimtex'
 call plug#end()
 
 " colorscheme
-set termguicolors
-set background=dark
 syntax on
-colorscheme gruvbox
+set termguicolors
+colorscheme onedark
+
+let g:airline_theme = 'onedark'
 
 " misc
 set number
@@ -30,11 +32,12 @@ set updatetime=300
 
 set exrc
 set secure
-
 set nohlsearch
 
 autocmd filetype python setlocal expandtab
 autocmd InsertLeave * write
+
+let g:tex_flavor = 'latex'
 
 " bindings
 nnoremap <c-j> ddp
@@ -89,17 +92,18 @@ iabbrev adn and
 
 " coc
 let g:coc_global_extensions = [
-			\ 'coc-spell-checker',
-			\ 'coc-snippets',
-			\ 'coc-actions',
-			\ 'coc-pairs',
-			\ 'coc-rls',
-			\ 'coc-json',
-			\ 'coc-calc',
-			\ 'coc-cmake',
-			\ 'coc-clangd',
-			\ 'coc-tsserver',
-			\ ]
+	\ 'coc-spell-checker',
+	\ 'coc-snippets',
+	\ 'coc-actions',
+	\ 'coc-pairs',
+	\ 'coc-rls',
+	\ 'coc-json',
+	\ 'coc-calc',
+	\ 'coc-cmake',
+	\ 'coc-clangd',
+	\ 'coc-vimtex',
+	\ 'coc-tsserver',
+	\ ]
 
 if has("patch-8.1.1564")
 	set signcolumn=number
