@@ -34,6 +34,8 @@ set exrc
 set secure
 set nohlsearch
 
+set mouse=a
+
 autocmd filetype python setlocal expandtab
 autocmd InsertLeave * write
 
