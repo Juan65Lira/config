@@ -7,6 +7,7 @@ call plug#begin()
 	Plug 'leafgarland/typescript-vim'
 	Plug 'pangloss/vim-javascript'
 	Plug 'lervag/vimtex'
+	Plug 'skammer/vim-css-color'
 call plug#end()
 
 " colorscheme
@@ -18,6 +19,7 @@ let g:airline_theme = 'onedark'
 
 " misc
 set number
+set numberwidth=2
 set noexpandtab
 set tabstop=3
 set shiftwidth=3
@@ -35,6 +37,9 @@ set secure
 set nohlsearch
 
 set mouse=a
+
+set list
+set listchars=tab:│\ ,trail:▓
 
 autocmd filetype python setlocal expandtab
 autocmd InsertLeave * write
