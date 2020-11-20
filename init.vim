@@ -1,21 +1,23 @@
 call plug#begin()
+	Plug 'connorholyday/vim-snazzy'
 	Plug 'joshdick/onedark.vim'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
-	Plug 'bfrg/vim-cpp-modern'
+	Plug 'sheerun/vim-polyglot'
 	Plug 'leafgarland/typescript-vim'
 	Plug 'pangloss/vim-javascript'
 	Plug 'lervag/vimtex'
 	Plug 'skammer/vim-css-color'
+	Plug 'enricobacis/vim-airline-clock'
 call plug#end()
 
 " colorscheme
 syntax on
 set termguicolors
 colorscheme onedark
+let g:airline_theme='onedark'
 
-let g:airline_theme = 'onedark'
 
 " misc
 set number
@@ -41,16 +43,11 @@ set mouse=a
 set list
 set listchars=tab:│\ ,trail:▓
 
-autocmd filetype python setlocal expandtab
-autocmd InsertLeave * write
-
 let g:tex_flavor = 'latex'
 
 " bindings
 nnoremap <c-j> ddp
-inoremap <c-j> <esc>ddpi
 nnoremap <c-k> ddkP
-inoremap <c-k> <esc>ddkPi
 
 nnoremap <a-j> yyp
 inoremap <a-j> <esc>yypi
@@ -71,10 +68,12 @@ vnoremap L $
 vnoremap J }
 vnoremap K {
 
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+nnoremap <C-A-H> <C-W><C-H>
+nnoremap <C-A-J> <C-W><C-J>
+nnoremap <C-A-K> <C-W><C-K>
+nnoremap <C-A-L> <C-W><C-L>
+
+inoremap ; ;<esc>:write<cr>
 
 let mapleader = ";"
 
