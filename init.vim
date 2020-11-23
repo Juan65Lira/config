@@ -5,8 +5,6 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'leafgarland/typescript-vim'
-	Plug 'pangloss/vim-javascript'
 	Plug 'lervag/vimtex'
 	Plug 'skammer/vim-css-color'
 	Plug 'enricobacis/vim-airline-clock'
@@ -79,6 +77,9 @@ let mapleader = ";"
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nnoremap <leader>ex :vsplit .exrc<cr>
+nnoremap <leader>sx :source .exrc<cr>
 
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
