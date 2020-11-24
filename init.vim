@@ -1,5 +1,4 @@
 call plug#begin()
-	Plug 'connorholyday/vim-snazzy'
 	Plug 'joshdick/onedark.vim'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
@@ -44,6 +43,8 @@ set listchars=tab:│\ ,trail:▓
 let g:tex_flavor = 'latex'
 
 " bindings
+autocmd FileType rust set noexpandtab tabstop=3 shiftwidth=3
+
 nnoremap <c-j> ddp
 nnoremap <c-k> ddkP
 
