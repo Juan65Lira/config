@@ -43,38 +43,40 @@ set listchars=tab:│\ ,trail:▓
 let g:tex_flavor = 'latex'
 
 " bindings
-autocmd FileType rust set noexpandtab tabstop=3 shiftwidth=3
-
-nnoremap <c-j> ddp
-nnoremap <c-k> ddkP
-
-nnoremap <a-j> yyp
-inoremap <a-j> <esc>yypi
-nnoremap <a-k> yyP
-inoremap <a-k> <esc>yyPi
-
-inoremap <c-d> <esc>ddi
 nnoremap <c-u> viwU
 inoremap <c-u> <esc>viwUea
 
-nnoremap H ^
-nnoremap L $
-nnoremap J }
-nnoremap K {
+noremap q ;
 
-vnoremap H ^
-vnoremap L $
-vnoremap J }
-vnoremap K {
+noremap d h
+noremap h j
+noremap t k
+noremap n l
 
-nnoremap <C-A-H> <C-W><C-H>
-nnoremap <C-A-J> <C-W><C-J>
-nnoremap <C-A-K> <C-W><C-K>
-nnoremap <C-A-L> <C-W><C-L>
+noremap D ^
+noremap H }
+noremap T {
+noremap N $
+
+noremap j d
+noremap s ;
+noremap S :
+
+" TODO: visualmode block movement and duplication
+nnoremap <a-h> yyp
+nnoremap <a-t> yyP
+
+nnoremap <c-h> ddp
+nnoremap <c-t> ddkP
+
+nnoremap <c-a-d> <C-W><C-H>
+nnoremap <c-a-h> <C-W><C-J>
+nnoremap <c-a-t> <C-W><C-K>
+nnoremap <c-a-n> <C-W><C-L>
 
 inoremap ; ;<esc>:write<cr>
 
-let mapleader = ";"
+let mapleader = "s"
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -97,6 +99,25 @@ nnoremap <silent> <leader>t :below split<cr>
 nnoremap <leader>f :NERDTreeToggle<cr>
 
 iabbrev adn and
+
+function s:rust_settings()
+	setlocal noexpandtab
+	setlocal tabstop=3
+	setlocal shiftwidth=3
+
+	iabbrev byte i8
+	iabbrev ubyte u8
+	iabbrev short i16
+	iabbrev ushort u16
+	iabbrev int i32
+	iabbrev uint u32
+	iabbrev long i64
+
+	iabbrev float f32
+	iabbrev double f64
+endfunction
+
+autocmd FileType rust setlocal noexpandtab tabstop=3 shiftwidth=3
 
 " coc
 let g:coc_global_extensions = [
