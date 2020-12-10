@@ -7,6 +7,7 @@ call plug#begin()
 	Plug 'lervag/vimtex'
 	Plug 'skammer/vim-css-color'
 	Plug 'enricobacis/vim-airline-clock'
+	Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " colorscheme
@@ -36,6 +37,7 @@ set secure
 set nohlsearch
 
 set mouse=a
+set encoding=UTF-8
 
 set list
 set listchars=tab:│\ ,trail:▓
@@ -98,9 +100,12 @@ nnoremap <silent> <leader>t :below split<cr>
 
 nnoremap <leader>f :NERDTreeToggle<cr>
 
+let g:NERDTreeMapOpenInTab = "\<TAB>"
+let g:NERDTreeQuitOnOpen = 1
+
 iabbrev adn and
 
-function s:rust_settings()
+function RustSettings()
 	setlocal noexpandtab
 	setlocal tabstop=3
 	setlocal shiftwidth=3
@@ -117,7 +122,8 @@ function s:rust_settings()
 	iabbrev double f64
 endfunction
 
-autocmd FileType rust setlocal noexpandtab tabstop=3 shiftwidth=3
+autocmd FileType rust call RustSettings()
+
 
 " coc
 let g:coc_global_extensions = [
