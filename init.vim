@@ -1,5 +1,5 @@
 call plug#begin()
-	Plug 'joshdick/onedark.vim'
+	Plug 'morhetz/gruvbox'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
@@ -13,8 +13,9 @@ call plug#end()
 " colorscheme
 syntax on
 set termguicolors
-colorscheme onedark
-let g:airline_theme='onedark'
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
+let g:gruvbox_contrast_dark='hard'
 
 
 " misc
