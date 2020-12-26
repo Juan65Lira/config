@@ -13,9 +13,9 @@ call plug#end()
 " colorscheme
 syntax on
 set termguicolors
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
 let g:gruvbox_contrast_dark='hard'
+let g:airline_theme='gruvbox'
+colorscheme gruvbox
 
 
 " misc
@@ -25,7 +25,7 @@ set noexpandtab
 set tabstop=3
 set shiftwidth=3
 set shiftround
-set colorcolumn=100
+set colorcolumn=101
 
 set hidden
 set nobackup
@@ -111,26 +111,30 @@ function RustSettings()
 	setlocal tabstop=3
 	setlocal shiftwidth=3
 
-	iabbrev byte i8
-	iabbrev ubyte u8
-	iabbrev short i16
-	iabbrev ushort u16
-	iabbrev int i32
-	iabbrev uint u32
-	iabbrev long i64
+	iabbrev <buffer> byte i8
+	iabbrev <buffer> ubyte u8
+	iabbrev <buffer> short i16
+	iabbrev <buffer> ushort u16
+	iabbrev <buffer> int i32
+	iabbrev <buffer> uint u32
+	iabbrev <buffer> long i64
 
-	iabbrev float f32
-	iabbrev double f64
+	iabbrev <buffer> float f32
+	iabbrev <buffer> double f64
+endfunction
+
+function LineTerminated()
+	inoremap <buffer> ; ;
+	inoremap <buffer> <cr> <esc>:write<cr>a<cr>
 endfunction
 
 autocmd FileType rust call RustSettings()
-
+autocmd FileType text,vim call LineTerminated()
 
 " coc
 let g:coc_global_extensions = [
 	\ 'coc-spell-checker',
 	\ 'coc-snippets',
-	\ 'coc-actions',
 	\ 'coc-pairs',
 	\ 'coc-rls',
 	\ 'coc-json',
@@ -191,12 +195,8 @@ endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-function! s:action_from_selection(type) abort
-	execute 'CocCommand actions.open ' . a:type
-endfunction
-
-xnoremap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>action_from_selection<CR>g@
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " VERY IMPORTANT, DO NOT TOUCH!!!
 if has('nvim')
