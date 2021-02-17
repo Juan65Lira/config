@@ -1,5 +1,5 @@
 call plug#begin()
-	Plug 'morhetz/gruvbox'
+	Plug 'sainnhe/sonokai'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
@@ -11,11 +11,16 @@ call plug#begin()
 call plug#end()
 
 " colorscheme
+if has('termguicolors')
+	set termguicolors
+endif
+
 syntax on
-set termguicolors
-let g:gruvbox_contrast_dark='hard'
-let g:airline_theme='gruvbox'
-colorscheme gruvbox
+let g:sonokai_style='andromeda'
+let g:sonokai_enable_italic=1
+let g:sonokai_diagnostic_text_highlight=1
+let g:airline_theme='sonokai'
+colorscheme sonokai
 
 
 " misc
@@ -94,15 +99,20 @@ nnoremap <leader>w :write<cr>
 nnoremap <leader>q :q<cr>
 
 nnoremap <silent> <leader>t :below split<cr>
-  \:resize 15<cr>
-  \:set nonumber<cr>
-  \:set signcolumn=no<cr>
-  \:terminal<cr>i
+	\ :resize 15<cr>
+	\ :set nonumber<cr>
+	\ :set signcolumn=no<cr>
+	\ :terminal<cr>i
 
 nnoremap <leader>f :NERDTreeToggle<cr>
 
 let g:NERDTreeMapOpenInTab = "\<TAB>"
 let g:NERDTreeQuitOnOpen = 1
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') &&
+	\ b:NERDTree.isTabTree() | quit | endif
 
 iabbrev adn and
 
@@ -118,6 +128,7 @@ function RustSettings()
 	iabbrev <buffer> int i32
 	iabbrev <buffer> uint u32
 	iabbrev <buffer> long i64
+	iabbrev <buffer> ulong u64
 
 	iabbrev <buffer> float f32
 	iabbrev <buffer> double f64
@@ -128,8 +139,17 @@ function LineTerminated()
 	inoremap <buffer> <cr> <esc>:write<cr>a<cr>
 endfunction
 
+function SpaceIndented()
+	setlocal expandtab
+	setlocal shiftwidth=4
+	setlocal tabstop=4
+endfunction
+
 autocmd FileType rust call RustSettings()
-autocmd FileType text,vim call LineTerminated()
+autocmd FileType text,vim,toml call LineTerminated()
+autocmd FileType python,bzl call SpaceIndented()
+
+autocmd BufRead,BufNewFile *.frag set filetype=glsl
 
 " coc
 let g:coc_global_extensions = [
