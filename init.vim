@@ -146,8 +146,8 @@ function SpaceIndented()
 endfunction
 
 autocmd FileType rust call RustSettings()
-autocmd FileType text,vim,toml call LineTerminated()
-autocmd FileType python,bzl call SpaceIndented()
+autocmd FileType text,vim,toml,conf call LineTerminated()
+autocmd FileType python,bzl,conf call SpaceIndented()
 
 autocmd BufRead,BufNewFile *.frag set filetype=glsl
 
