@@ -46,7 +46,7 @@ set mouse=a
 set encoding=UTF-8
 
 set list
-set listchars=tab:│\ ,trail:▓
+set listchars=tab:│\ ,trail:▓,space:∙
 
 let g:tex_flavor = 'latex'
 
