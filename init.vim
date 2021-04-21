@@ -5,7 +5,6 @@ call plug#begin()
 	Plug 'preservim/nerdtree'
 	Plug 'sheerun/vim-polyglot'
 	Plug 'lervag/vimtex'
-	Plug 'skammer/vim-css-color'
 	Plug 'enricobacis/vim-airline-clock'
 	Plug 'ryanoasis/vim-devicons'
 call plug#end()
@@ -163,6 +162,8 @@ let g:coc_global_extensions = [
 	\ 'coc-clangd',
 	\ 'coc-vimtex',
 	\ 'coc-tsserver',
+	\ 'coc-prettier',
+	\ 'coc-omnisharp'
 	\ ]
 
 if has("patch-8.1.1564")
@@ -214,6 +215,8 @@ function s:show_documentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
