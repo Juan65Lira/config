@@ -1,5 +1,6 @@
 call plug#begin()
 	Plug 'sainnhe/sonokai'
+	Plug 'morhetz/gruvbox'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
@@ -15,12 +16,12 @@ if has('termguicolors')
 endif
 
 syntax on
-let g:sonokai_style='andromeda'
-let g:sonokai_enable_italic=1
-let g:sonokai_diagnostic_text_highlight=1
-let g:airline_theme='sonokai'
-colorscheme sonokai
 
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_strings = 1
+let g:gruvbox_improved_warnings = 1
+let g:airline_theme = "gruvbox"
+colorscheme gruvbox
 
 " misc
 set number
