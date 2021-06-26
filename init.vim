@@ -1,13 +1,13 @@
 call plug#begin()
-	Plug 'sainnhe/sonokai'
 	Plug 'morhetz/gruvbox'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'vim-airline/vim-airline'
 	Plug 'preservim/nerdtree'
 	Plug 'sheerun/vim-polyglot'
-	Plug 'lervag/vimtex'
 	Plug 'enricobacis/vim-airline-clock'
 	Plug 'ryanoasis/vim-devicons'
+	Plug 'kien/ctrlp.vim'
+	Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " colorscheme
@@ -18,7 +18,6 @@ endif
 syntax on
 
 let g:gruvbox_italic = 1
-let g:gruvbox_italicize_strings = 1
 let g:gruvbox_improved_warnings = 1
 let g:gruvbox_contrast_dark = "hard"
 let g:airline_theme = "gruvbox"
@@ -27,20 +26,13 @@ colorscheme gruvbox
 " misc
 set number
 set numberwidth=2
-set noexpandtab
-set tabstop=3
-set shiftwidth=3
-set shiftround
 set colorcolumn=101
 
 set hidden
 set nobackup
 set nowritebackup
-set cmdheight=2
+set cmdheight=1
 set updatetime=300
-
-set exrc
-set secure
 set nohlsearch
 
 set mouse=a
@@ -49,7 +41,14 @@ set encoding=UTF-8
 set list
 set listchars=tab:│\ ,trail:▓,space:∙
 
-let g:tex_flavor = 'latex'
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
 " bindings
 nnoremap <c-u> viwU
@@ -118,10 +117,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 iabbrev adn and
 
 function RustSettings()
-	setlocal noexpandtab
-	setlocal tabstop=3
-	setlocal shiftwidth=3
-
 	iabbrev <buffer> byte i8
 	iabbrev <buffer> ubyte u8
 	iabbrev <buffer> short i16
@@ -130,14 +125,23 @@ function RustSettings()
 	iabbrev <buffer> uint u32
 	iabbrev <buffer> long i64
 	iabbrev <buffer> ulong u64
+	iabbrev <buffer> longlong i128
+	iabbrev <buffer> ulonglong u128
 
 	iabbrev <buffer> float f32
 	iabbrev <buffer> double f64
 endfunction
 
+function CSettings()
+	iabbrev <buffer> uchar unsigned char
+	iabbrev <buffer> ushort unsigned short
+	iabbrev <buffer> uint unsigned int
+	iabbrev <buffer> ulong unsigned long
+	iabbrev <buffer> ulonglong unsigned longlong
+endfunction
+
 function LineTerminated()
 	inoremap <buffer> ; ;
-	inoremap <buffer> <cr> <esc>:write<cr>a<cr>
 endfunction
 
 function SpaceIndented()
@@ -146,11 +150,13 @@ function SpaceIndented()
 	setlocal tabstop=4
 endfunction
 
+autocmd FileType c,cpp call CSettings()
 autocmd FileType rust call RustSettings()
-autocmd FileType text,vim,toml,conf call LineTerminated()
+autocmd FileType text,vim,toml,conf,cmake,python call LineTerminated()
 autocmd FileType python,bzl,conf call SpaceIndented()
 
 autocmd BufRead,BufNewFile *.frag set filetype=glsl
+autocmd BufRead,BufNewFile *.axaml set filetype=xml
 
 " coc
 let g:coc_global_extensions = [
@@ -159,13 +165,12 @@ let g:coc_global_extensions = [
 	\ 'coc-pairs',
 	\ 'coc-rls',
 	\ 'coc-json',
-	\ 'coc-calc',
+	\ 'coc-python',
 	\ 'coc-cmake',
 	\ 'coc-clangd',
-	\ 'coc-vimtex',
+	\ 'coc-texlab',
 	\ 'coc-tsserver',
 	\ 'coc-prettier',
-	\ 'coc-omnisharp'
 	\ ]
 
 if has("patch-8.1.1564")
