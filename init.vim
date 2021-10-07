@@ -45,46 +45,43 @@ if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 
 " bindings
 nnoremap <c-u> viwU
 inoremap <c-u> <esc>viwUea
 
-noremap q ;
+noremap y h
+noremap n j
+noremap e k
+noremap o l
 
-noremap d h
-noremap h j
-noremap t k
-noremap n l
+noremap Y ^
+noremap N }
+noremap E {
+noremap O $
 
-noremap D ^
-noremap H }
-noremap T {
-noremap N $
-
-noremap j d
-noremap s ;
-noremap S :
+noremap l o
+noremap L O
 
 " TODO: visualmode block movement and duplication
-nnoremap <a-h> yyp
-nnoremap <a-t> yyP
+nnoremap <a-n> yyp
+nnoremap <a-e> yyP
 
-nnoremap <c-h> ddp
-nnoremap <c-t> ddkP
+nnoremap <c-n> ddp
+nnoremap <c-e> ddkP
 
-nnoremap <c-a-d> <C-W><C-H>
-nnoremap <c-a-h> <C-W><C-J>
-nnoremap <c-a-t> <C-W><C-K>
-nnoremap <c-a-n> <C-W><C-L>
+nnoremap <c-a-y> <C-W><C-H>
+nnoremap <c-a-n> <C-W><C-J>
+nnoremap <c-a-e> <C-W><C-K>
+nnoremap <c-a-o> <C-W><C-L>
 
 inoremap ; ;<esc>:write<cr>
 
-let mapleader = "s"
+let mapleader = ";"
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
